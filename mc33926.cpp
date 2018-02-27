@@ -30,26 +30,29 @@ mc33926::mc33926(int PWMPin, int dirPin) {
  * 0 is stop
  */
 void mc33926::setMotorVelocity(int velocity) {
-    if(velocity > 100){
+
+    //if input is greater than 100 set to 100
+    if (velocity > 100) {
         velocity = 100;
-    }else if(velocity < -100){
+    } else if (velocity < -100) {
+        //if input is less than -100 set to -100
         velocity = -100;
     }
 
-    if(velocity > 0){
+    if (velocity > 0) {
         digitalWrite(_pinDir, HIGH);
-        analogWrite(_pinPWM, (int)(velocity*2.55));
-    }else if(velocity < 0){
+        analogWrite(_pinPWM, (int) (velocity * 2.55));
+    } else if (velocity < 0) {
         digitalWrite(_pinDir, LOW);
-        analogWrite(_pinPWM, (int)(velocity*2.55));
-    }else {
+        analogWrite(_pinPWM, (int) (velocity * -2.55));
+    } else {
         analogWrite(_pinPWM, 0);
     }
 
 }
 
 /**
- * stops the motor s
+ * stops the motor
  */
 void mc33926::stopMotor() {
     analogWrite(_pinPWM, 0);
