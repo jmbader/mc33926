@@ -1,18 +1,11 @@
 /*
  * written by Jacob Bader
- * 2/24/2018
- *
- * For Pololu mc33926 DC motor driver
+ * updated 3/12/2018
  */
 
 #include "mc33926.h"
 #include "Arduino.h"
 
-/**
- * creates a motor controller object
- * @param PWMPin must be PWM pin, used for speed control
- * @param dirPin pin to control direction
- */
 mc33926::mc33926(int PWMPin, int dirPin) {
     _pinDir = dirPin;
     _pinPWM = PWMPin;
@@ -31,29 +24,30 @@ mc33926::mc33926(int PWMPin, int dirPin) {
  */
 void mc33926::setMotorVelocity(int velocity) {
 
-    //if input is greater than 100 set to 100
     if (velocity > 100) {
+        //if velocity is greater than 100 set it to 100
         velocity = 100;
     } else if (velocity < -100) {
-        //if input is less than -100 set to -100
+        //if velocity is less than -100 set it to -100
         velocity = -100;
     }
 
+    analogWrite(_pinPWM, (int) (abs(velocity) * 2.55));
+
     if (velocity > 0) {
+        //positive velocity
         digitalWrite(_pinDir, HIGH);
-        analogWrite(_pinPWM, (int) (velocity * 2.55));
     } else if (velocity < 0) {
+        //negative velocity
         digitalWrite(_pinDir, LOW);
-        analogWrite(_pinPWM, (int) (velocity * -2.55));
     } else {
+        //stop the motor
         analogWrite(_pinPWM, 0);
     }
 
 }
 
-/**
- * stops the motor
- */
 void mc33926::stopMotor() {
+    //stops the motor
     analogWrite(_pinPWM, 0);
 }

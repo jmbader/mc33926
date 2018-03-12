@@ -1,10 +1,13 @@
 # mc33926
 
-PWM on D2 for speed control -> Arduino
+PWM on D2 for speed control --> Arduino
 
-Direction control on INV ->Arduino
+Direction control on INV --> Arduino
 
-IN1 held HIGH
+
+Jumpers:
+
+IN1 held HIGH 
 
 IN2 held LOW
 
