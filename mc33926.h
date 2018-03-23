@@ -5,6 +5,7 @@
 
 class mc33926{
 public:
+    mc33926();
     mc33926(int, int);
     void setMotorVelocity(int);
     void stopMotor();

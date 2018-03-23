@@ -6,6 +6,20 @@
 #include "mc33926.h"
 #include "Arduino.h"
 
+/**
+ *
+ * default constructor
+ * do not use this
+ */
+mc33926::mc33926() {
+    //Do nothing
+}
+
+/**
+ *
+ * @param PWMPin the pwm pin the motor controller is connected to
+ * @param dirPin any dio on the arduino, it controls direction
+ */
 mc33926::mc33926(int PWMPin, int dirPin) {
     _pinDir = dirPin;
     _pinPWM = PWMPin;
@@ -47,6 +61,9 @@ void mc33926::setMotorVelocity(int velocity) {
 
 }
 
+/**
+ * stops the motor
+ */
 void mc33926::stopMotor() {
     //stops the motor
     analogWrite(_pinPWM, 0);
