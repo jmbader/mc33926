@@ -46,7 +46,10 @@ void mc33926::setMotorVelocity(int velocity) {
         velocity = -100;
     }
 
-    analogWrite(_pinPWM, (int) (abs(velocity) * 2.55));
+    // 100 vel = 0 analog
+    //
+
+    analogWrite(_pinPWM, (int)((abs(velocity)) * (-255/100) + 255));
 
     if (velocity > 0) {
         //positive velocity
@@ -66,5 +69,5 @@ void mc33926::setMotorVelocity(int velocity) {
  */
 void mc33926::stopMotor() {
     //stops the motor
-    analogWrite(_pinPWM, 0);
+    analogWrite(_pinPWM, 255);
 }
